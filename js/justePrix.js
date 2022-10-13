@@ -1,77 +1,76 @@
-let level = 1;
-let randomNumber;
-let counter = 0;
-let partyCounter = 0;
-let victory = false;
-let userNumber;
-const boardResultJustePrix = document.querySelector('.boardResultJustePrix');
+const JustePrix = {
+    level : 1,
+    randomNumber : "",
+    counter : 0,
+    partyCounter : 0,
+    victory : false,
+    userNumber : "",
+    boardResultJustePrix : document.querySelector('.boardResultJustePrix'),
 
+    startJustePrix : function() {
+        JustePrix.initGame();
+        JustePrix.playGame();
+        JustePrix.endGame();
+        JustePrix.displayScore();
+    },
 
+    initGame : function() {
+        JustePrix.chooseLevel();
+        JustePrix.randomNumber = Math.round(Math.random() * (JustePrix.level * 10));
+        JustePrix.counter = 1;
+        JustePrix.partyCounter++;
+        JustePrix.victory = false;
+    },
 
+    chooseLevel : function() {
+        do{
+            JustePrix.level = parseInt(prompt(`Choissisez votre niveau entre 1 et 10 (Question obligatoire !)`));
+        } while (isNaN(JustePrix.level) || JustePrix.level < 1 || JustePrix.level > 10);
+    },
 
-function startJustePrix() {
-    initGame();
-    playGame();
-    endGame();
-    displayScore();
-}
+    displayScore : function() {
+        let rowScore = document.createElement('tr');
+        let cellPartyNumber = document.createElement('td');
+        cellPartyNumber.textContent = JustePrix.partyCounter;
+        let cellScore = document.createElement('td');
+        cellScore.textContent = JustePrix.counter;
+        let cellVictory = document.createElement('td');
+        cellVictory.textContent = JustePrix.victory;
+        let cellRandomNumber = document.createElement('td');
+        cellRandomNumber.textContent = JustePrix.randomNumber;
+        let cellLevel = document.createElement('td');
+        cellLevel.textContent = JustePrix.level;
+    
+        rowScore.appendChild(cellPartyNumber);
+        rowScore.appendChild(cellLevel);
+        rowScore.appendChild(cellRandomNumber);
+        rowScore.appendChild(cellScore);
+        rowScore.appendChild(cellVictory);
+        JustePrix.boardResultJustePrix.appendChild(rowScore);
+    },
 
-function initGame() {
-    chooseLevel();
-    randomNumber = Math.round(Math.random() * (level * 10));
-    counter = 1;
-    partyCounter++;
-    victory = false;
-}
-
-function chooseLevel() {
-    do{
-        level = parseInt(prompt(`Choissisez votre niveau entre 1 et 10 (Question obligatoire !)`));
-    } while (isNaN(level) || level < 1 || level > 10);
-}
-
-function displayScore() {
-    let rowScore = document.createElement('tr');
-    let cellPartyNumber = document.createElement('td');
-    cellPartyNumber.textContent = partyCounter;
-    let cellScore = document.createElement('td');
-    cellScore.textContent = counter;
-    let cellVictory = document.createElement('td');
-    cellVictory.textContent = victory;
-    let cellRandomNumber = document.createElement('td');
-    cellRandomNumber.textContent = randomNumber;
-    let cellLevel = document.createElement('td');
-    cellLevel.textContent = level;
-
-    rowScore.appendChild(cellPartyNumber);
-    rowScore.appendChild(cellLevel);
-    rowScore.appendChild(cellRandomNumber);
-    rowScore.appendChild(cellScore);
-    rowScore.appendChild(cellVictory);
-    boardResultJustePrix.appendChild(rowScore);
-}
-
-function endGame() {
-    if (userNumber === randomNumber) {
-        alert(`OUI OUI OUI, C'est Gagné !!! Vous avez réussi en ${counter} essais`);
-        victory = true;
-    } else {
-        counter--;
-        alert(`C'est perdu. Vous avez fait ${counter} essais !`);
-    }
-}
-
-function playGame() {
-    userNumber = parseInt(prompt(`Trouvez le Juste Prix entre 0 et ${level * 10}`));
-
-    while (userNumber !== randomNumber) {
-        if (isNaN(userNumber)){
-            break;
-        } else if (userNumber < randomNumber) {
-            userNumber = parseInt(prompt(`C'est PLUS que ${userNumber}`));
-        } else if (userNumber > randomNumber) {
-            userNumber = parseInt(prompt(`C'est MOINS que ${userNumber}`));
+    endGame : function() {
+        if (JustePrix.userNumber === JustePrix.randomNumber) {
+            alert(`OUI OUI OUI, C'est Gagné !!! Vous avez réussi en ${JustePrix.counter} essais`);
+            JustePrix.victory = true;
+        } else {
+            JustePrix.counter--;
+            alert(`C'est perdu. Vous avez fait ${JustePrix.counter} essais !`);
         }
-        counter++;
-    }
+    },
+    
+    playGame : function() {
+        JustePrix.userNumber = parseInt(prompt(`Trouvez le Juste Prix entre 0 et ${JustePrix.level * 10}`));
+    
+        while (JustePrix.userNumber !== JustePrix.randomNumber) {
+            if (isNaN(JustePrix.userNumber)){
+                break;
+            } else if (JustePrix.userNumber < JustePrix.randomNumber) {
+                JustePrix.userNumber = parseInt(prompt(`C'est PLUS que ${JustePrix.userNumber}`));
+            } else if (userNumber > randomNumber) {
+                JustePrix.userNumber = parseInt(prompt(`C'est MOINS que ${JustePrix.userNumber}`));
+            }
+            JustePrix.counter++;
+        }
+    },
 }
