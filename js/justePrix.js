@@ -67,7 +67,7 @@ const JustePrix = {
                 break;
             } else if (JustePrix.userNumber < JustePrix.randomNumber) {
                 JustePrix.userNumber = parseInt(prompt(`C'est PLUS que ${JustePrix.userNumber}`));
-            } else if (userNumber > randomNumber) {
+            } else if (JustePrix.userNumber > JustePrix.randomNumber) {
                 JustePrix.userNumber = parseInt(prompt(`C'est MOINS que ${JustePrix.userNumber}`));
             }
             JustePrix.counter++;
