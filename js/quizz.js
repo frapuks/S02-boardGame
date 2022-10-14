@@ -178,7 +178,7 @@ const Quizz = {
     bonnesReponses : "",
     mauvaisesReponses : "",
     boardResultQuizz : document.querySelector('.boardResultQuizz'),
-    divResultQuizz : document.querySelector('.resultQuizz'),
+    divResultQuizz : document.querySelector('.boardResult'),
     nombreDeQuestions : 0,
     partyCounter : 0,
 
@@ -288,6 +288,3 @@ const Quizz = {
         Quizz.boardResultQuizz.appendChild(rowScore);
     },
 };
-
-// TODO
-// Gestion de la fonction displayscore
